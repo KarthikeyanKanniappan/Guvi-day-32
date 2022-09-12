@@ -1,8 +1,28 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 import { Link } from "react-router-dom";
+import axios from "../Api";
+import Spinner from "./Spinner";
+
 const BooksIssued = () => {
-  return (
+  const [spinner, setSpinner] = useState(true);
+  const [id, setId] = useState([]);
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    getdata();
+  }, []);
+  let getdata = async () => {
+    let response = await axios.get("/user");
+    setId(response.data);
+    if (response.status === 200) {
+      setSpinner(false);
+    }
+  };
+  return spinner ? (
+    <div>
+      <Spinner />
+    </div>
+  ) : (
     <div>
       <h1>Issued Book Management</h1>
       <div className="card mb-4">
@@ -22,7 +42,7 @@ const BooksIssued = () => {
           </div>
         </div>
         <div className="card-body">
-          <table className="table table-bordered">
+          <table className="table table-bordered text-center">
             <thead>
               <tr>
                 <th>Book ISBN Number</th>
@@ -46,19 +66,28 @@ const BooksIssued = () => {
               </tr>
             </tfoot>
             <tbody>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                  <Link to="viewDetails" class="btn btn-info btn-sm">
-                    View
-                  </Link>
-                </td>
-              </tr>
+              {id.map((el, i) => {
+                return (
+                  <tr key={i}>
+                    <td>{i + 1}</td>
+                    <td>{el.uniqueId}</td>
+                    <td>{el.issueDate}</td>
+                    <td>{el.returnDate}</td>
+                    <td>₹ {el.returnFine}</td>
+                    <td>
+                      <span class="badge bg-primary">Return</span>
+                    </td>
+                    <td>
+                      <Link
+                        to={`viewDetails/${el.id}`}
+                        className="btn btn-info btn-sm"
+                      >
+                        View
+                      </Link>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>

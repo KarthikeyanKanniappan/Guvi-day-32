@@ -2,7 +2,7 @@ import React from "react";
 import { SidebarData } from "./SidebarData";
 import CloseIcon from "@mui/icons-material/Close";
 
-const SideBar = ({ setSidebar }) => {
+const SideBar = () => {
   return (
     <div className={`sidebar`}>
       <ul className="sidebarList">
@@ -21,16 +21,6 @@ const SideBar = ({ setSidebar }) => {
           );
         })}
       </ul>
-      <div className="d-flex justify-content-center">
-        <button
-          onClick={() => {
-            setSidebar(true);
-          }}
-          className="btn btn-dark"
-        >
-          <CloseIcon />
-        </button>
-      </div>
     </div>
   );
 };

@@ -61,7 +61,7 @@ const User = () => {
                     <td>
                       <img
                         src={`${el.image}`}
-                        class="img-thumbnail"
+                        className="img-thumbnail"
                         style={{ width: "85px", borderRadius: "50px" }}
                       />
                     </td>
@@ -76,7 +76,7 @@ const User = () => {
                       <button
                         type="button"
                         name="delete_button"
-                        class="btn btn-danger btn-sm"
+                        className="btn btn-danger btn-sm"
                       >
                         Delete
                       </button>

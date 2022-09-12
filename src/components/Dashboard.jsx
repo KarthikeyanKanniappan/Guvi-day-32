@@ -25,15 +25,15 @@ const Dashboard = () => {
   ];
   return (
     <div>
-      <h1 class="mb-5">Dashboard</h1>
-      <div class="row">
+      <h1 className="mb-5">Dashboard</h1>
+      <div className="row">
         {data.map((el) => {
           return (
-            <div class="col-xl-3 col-md-6">
-              <div class={`card bg-${el.color} text-white mb-4`}>
-                <div class="card-body">
-                  <h1 class="text-center">{el.count}</h1>
-                  <h5 class="text-center">{el.title}</h5>
+            <div className="col-xl-3 col-md-6">
+              <div className={`card bg-${el.color} text-white mb-4`}>
+                <div className="card-body">
+                  <h1 className="text-center">{el.count}</h1>
+                  <h5 className="text-center">{el.title}</h5>
                 </div>
               </div>
             </div>

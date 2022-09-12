@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import TableViewIcon from "@mui/icons-material/TableView";
 import Table from "../components/Table";
 import { Link } from "react-router-dom";
+import Spinner from "./Spinner";
 
 const Book = () => {
-  return (
+  const [spinner, setSpinner] = useState(false);
+
+  let getInfo = (val) => {
+    setSpinner(val);
+    console.log(val);
+  };
+  return spinner ? (
+    <div>
+      <Spinner />
+    </div>
+  ) : (
     <div>
       <h1>Book Management</h1>
       <div className="card mb-4">
@@ -20,8 +31,8 @@ const Book = () => {
             </div>
           </div>
         </div>
-        <div class="card-body">
-          <Table />
+        <div className="card-body">
+          <Table getInfo={getInfo} />
         </div>
       </div>
     </div>

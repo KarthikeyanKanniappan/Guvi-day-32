@@ -2,7 +2,7 @@ import React from "react";
 import "../index.css";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
-const Navbar = ({ setSidebar }) => {
+const Navbar = ({ sidebar, setSidebar }) => {
   return (
     <div>
       <nav className="navbar navbar-dark bg-dark ">
@@ -12,7 +12,7 @@ const Navbar = ({ setSidebar }) => {
           </Link>
           <button
             onClick={() => {
-              setSidebar(false);
+              setSidebar(!sidebar);
             }}
             className="btn btn-dark"
           >

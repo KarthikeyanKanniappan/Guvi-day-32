@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import axios from "../Api";
-const Table = () => {
+const Table = ({ getInfo }) => {
   const [el, setEl] = useState([]);
   useEffect(() => {
     getElement();
@@ -10,6 +10,9 @@ const Table = () => {
     try {
       let response = await axios.get("/library");
       setEl(response.data);
+      // if (response.status === 200) {
+      //   getInfo(false);
+      // }
     } catch (e) {
       console.log(e);
     }
@@ -55,13 +58,13 @@ const Table = () => {
               <td>{el.created}</td>
               <td>{el.action}</td>
               <td>
-                <a href="" class="btn btn-sm btn-primary">
+                <a href="" className="btn btn-sm btn-primary">
                   Edit
                 </a>
                 <button
                   type="button"
                   name="delete_button"
-                  class="btn btn-danger btn-sm"
+                  className="btn btn-danger btn-sm"
                 >
                   Delete
                 </button>

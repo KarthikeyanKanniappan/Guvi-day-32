@@ -6,11 +6,11 @@ const Portal = () => {
   const [sidebar, setSidebar] = useState(false);
   return (
     <div className="App">
-      <Navbar setSidebar={setSidebar} />
+      <Navbar sidebar={sidebar} setSidebar={setSidebar} />
       <div>
         <div className="row">
           <div className={`col-md-2 paper  ${sidebar ? "hide" : ""} `}>
-            <SideBar setSidebar={setSidebar} />
+            <SideBar sidebar={sidebar} setSidebar={setSidebar} />
           </div>
           <div className={`${sidebar ? "col-md-12" : "col-md-10"}`}>
             <div
