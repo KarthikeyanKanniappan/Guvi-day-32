@@ -10,27 +10,29 @@ import IssuedBookManagement from "./components/IssuedBookManagement";
 import ViewDetail from "./components/ViewDetail";
 import Dashboard from "./components/Dashboard";
 import { UserProvider } from "./components/UserContext";
+import EditBook from "./components/EditBook";
 
 function App() {
   return (
-    <UserProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Portal />}>
-            <Route index element={<Dashboard />} />
-            <Route path="book" element={<Book />} />
-            <Route path="user" element={<User />} />
-            <Route path="bookIssued" element={<BooksIssued />} />
-            <Route path="book/AddBook" element={<AddBook />} />
-            <Route
-              path="IssuedBookManagement"
-              element={<IssuedBookManagement />}
-            />
-            <Route path="bookIssued/viewDetails/:id" element={<ViewDetail />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </UserProvider>
+    // <UserProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Portal />}>
+          <Route index element={<Dashboard />} />
+          <Route path="book" element={<Book />} />
+          <Route path="user" element={<User />} />
+          <Route path="bookIssued" element={<BooksIssued />} />
+          <Route path="book/AddBook" element={<AddBook />} />
+          <Route
+            path="IssuedBookManagement"
+            element={<IssuedBookManagement />}
+          />
+          <Route path="bookIssued/viewDetails/:id" element={<ViewDetail />} />
+          <Route path="/book/edit/:id" element={<EditBook />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+    // </UserProvider>
   );
 }
 

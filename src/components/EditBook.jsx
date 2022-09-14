@@ -1,9 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
-import axios from "axios";
+import axios from "../Api";
+import { useParams, useNavigate } from "react-router-dom";
 
-const AddBook = () => {
+const EditBook = () => {
+  const params = useParams();
+  const navigate = useNavigate();
+  useEffect(() => {
+    getUser(params.id);
+  }, []);
+
+  let getUser = async (id) => {
+    try {
+      let response = await axios.get(`/library/${id}`);
+      formik.setValues({
+        book: response.data.book,
+        i: response.data.i,
+        category: response.data.category,
+        author: response.data.author,
+        locationRack: response.data.locationRack,
+        created: response.data.created,
+        action: response.data.action,
+        copy: response.data.copy,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const formik = useFormik({
     initialValues: {
       book: "",
@@ -25,18 +50,15 @@ const AddBook = () => {
       return errors;
     },
     onSubmit: async (values) => {
-      console.log(values);
-      await axios.post(
-        "https://631c51974fa7d3264cab5877.mockapi.io/library",
-        values
-      );
+      await axios.put(`/library/${params.id}`, values);
       alert("User Created");
+      navigate(`/book`);
     },
   });
   return (
     <div className="card mb-4">
       <div className="card-header">
-        <PersonAddAltIcon /> Add New Book
+        <PersonAddAltIcon /> Edit Book
       </div>
       <div className="card-body">
         <form onSubmit={formik.handleSubmit}>
@@ -171,4 +193,4 @@ const AddBook = () => {
   );
 };
 
-export default AddBook;
+export default EditBook;

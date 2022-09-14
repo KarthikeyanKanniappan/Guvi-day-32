@@ -61,7 +61,7 @@ const ViewDetail = () => {
         </tr>
         <tr>
           <th width="30%">User Name</th>
-          <td width="70%">{data.user}</td>
+          <td width="70%">{data.name}</td>
         </tr>
         <tr>
           <th width="30%">User Address</th>

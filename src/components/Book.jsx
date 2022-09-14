@@ -11,6 +11,7 @@ const Book = () => {
     setSpinner(val);
     console.log(val);
   };
+
   return spinner ? (
     <div>
       <Spinner />

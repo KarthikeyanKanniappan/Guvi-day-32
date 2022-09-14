@@ -4,9 +4,27 @@ import axios from "../Api";
 import { borderRadius } from "@mui/system";
 const User = () => {
   const [active, setActive] = useState([]);
+  const [count, setCount] = useState(0);
+
+  let userDelete = async (id) => {
+    try {
+      await axios.delete(`/user/${id}`);
+      let user = active.findIndex((el) => el.id === id);
+      active.splice(user, 1);
+      setCount((c) => c + 1);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    setActive(active);
+  }, [count]);
+
   useEffect(() => {
     getData();
   }, []);
+
   let getData = async () => {
     try {
       let response = await axios.get("/user");
@@ -77,6 +95,9 @@ const User = () => {
                         type="button"
                         name="delete_button"
                         className="btn btn-danger btn-sm"
+                        onClick={() => {
+                          userDelete(el.id);
+                        }}
                       >
                         Delete
                       </button>

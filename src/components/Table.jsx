@@ -1,15 +1,35 @@
 import React, { useState, useEffect } from "react";
-
+import { Link } from "react-router-dom";
 import axios from "../Api";
+
 const Table = ({ getInfo }) => {
-  const [el, setEl] = useState([]);
+  const [count, setCount] = useState(0);
+  const [book, setBook] = useState([]);
+
   useEffect(() => {
     getElement();
   }, []);
+
+  let userDelete = async (id) => {
+    try {
+      await axios.delete(`/library/${id}`);
+      let index = book.findIndex((el) => el.id === id);
+      book.splice(index, 1);
+      console.log(book);
+      setCount((c) => c + 1);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    setBook(book);
+  }, [count]);
+
   let getElement = async () => {
     try {
       let response = await axios.get("/library");
-      setEl(response.data);
+      setBook(response.data);
       // if (response.status === 200) {
       //   getInfo(false);
       // }
@@ -46,7 +66,7 @@ const Table = ({ getInfo }) => {
         </tr>
       </tfoot>
       <tbody>
-        {el.map((el, id) => {
+        {book.map((el, id) => {
           return (
             <tr key={el.id}>
               <td>{el.book}</td>
@@ -58,13 +78,16 @@ const Table = ({ getInfo }) => {
               <td>{el.created}</td>
               <td>{el.action}</td>
               <td>
-                <a href="" className="btn btn-sm btn-primary">
+                <Link to={`edit/${el.id}`} className="btn btn-sm btn-primary">
                   Edit
-                </a>
+                </Link>
                 <button
                   type="button"
                   name="delete_button"
                   className="btn btn-danger btn-sm"
+                  onClick={() => {
+                    userDelete(el.id);
+                  }}
                 >
                   Delete
                 </button>
